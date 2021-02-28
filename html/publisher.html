@@ -1,0 +1,1961 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>ASSIGNMENT TWO - ELEC 4700</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-02-28"><meta name="DC.source" content="publisher.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>ASSIGNMENT TWO - ELEC 4700</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Joseph Kingsley A.Amiah</a></li><li><a href="#2">Question 1</a></li><li><a href="#3">(a) Case where V = Vo at x = 0 and V = 0 at x = L;</a></li><li><a href="#4">(b) Case where V = Vo at x = 0, x = L and V = 0 at y = 0, y = W;</a></li><li><a href="#6">Question 2</a></li><li><a href="#7">Graph of current vs mesh size</a></li><li><a href="#8">Current vs bottle Neck</a></li><li><a href="#10">Current vs Conductivity</a></li></ul></div><h2 id="1">Joseph Kingsley A.Amiah</h2><h2 id="2">Question 1</h2><h2 id="3">(a) Case where V = Vo at x = 0 and V = 0 at x = L;</h2><p>The Code</p><pre class="codeinput">clearvars
+clearvars <span class="string">-GLOBAL</span>
+close <span class="string">all</span>
+<span class="comment">%set(0,'DefaultFigureWindowStyle', 'docked')</span>
+
+<span class="keyword">global</span> C
+<span class="keyword">global</span> CuCond
+<span class="keyword">global</span> nx ny
+
+C.q_0 = 1.60217653e-19;             <span class="comment">% electron charge</span>
+C.hb = 1.054571596e-34;             <span class="comment">% Dirac constant</span>
+C.h = C.hb * 2 * pi;                    <span class="comment">% Planck constant</span>
+C.m_0 = 9.10938215e-31;             <span class="comment">% electron mass</span>
+C.kb = 1.3806504e-23;               <span class="comment">% Boltzmann constant</span>
+C.eps_0 = 8.854187817e-12;          <span class="comment">% vacuum permittivity</span>
+C.mu_0 = 1.2566370614e-6;           <span class="comment">% vacuum permeability</span>
+C.c = 299792458;                    <span class="comment">% speed of light</span>
+C.g = 9.80665;                      <span class="comment">% metres (32.1740 ft) per s&sup2;</span>
+
+nx = 75;
+ny = 50;
+
+CuCond = 1.7e-8;
+
+<span class="comment">%Conductivity Map</span>
+
+cMap = zeros(nx,ny);
+
+<span class="keyword">for</span> i = 1:nx
+    <span class="keyword">for</span> j = 1: ny
+        cMap(i,j) = CuCond;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+G = sparse(nx*ny, nx*ny);
+F = zeros(1, nx*ny);
+
+<span class="comment">% G - Matrix Formulation</span>
+
+<span class="keyword">for</span> i = 1:nx
+    <span class="keyword">for</span> j = 1:ny
+        n = j + (i - 1) * ny;
+
+        <span class="keyword">if</span> i == 1
+            G(n,:) = 0;
+            G(n,n) = 1;
+             F(n) = 1;
+
+        <span class="keyword">elseif</span> i == nx
+             G(n,:) = 0;
+             G(n,n) = 1;
+
+        <span class="keyword">elseif</span> j == 1
+            nxm = j + (i-2) * ny;
+            nxp = j + (i) * ny;
+            nyp = (j+1) + (i-1) * ny;
+
+            rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+            rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+            ryp = (cMap(i,j) + cMap(i,j+1))/2.0;
+
+            G(n,n) = -(rxm + rxp + ryp);
+            G(n,nxm) = rxm;
+            G(n,nxp) = rxp;
+            G(n, nyp) = ryp;
+
+        <span class="keyword">elseif</span> j == ny
+            nxm = j + (i-2) * ny;
+            nxp = j + (i) * ny;
+            nym = (j-1) + (i-1) * ny;
+
+            rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+            rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+            rym = (cMap(i,j) + cMap(i,j-1))/2.0;
+
+            G(n,n) = -(rxm + rxp + rym);
+            G(n,nxm) = rxm;
+            G(n,nxp) = rxp;
+            G(n, nym) = rym;
+
+        <span class="keyword">else</span>
+            nxm = j + (i-2) * ny;
+            nxp = j + (i) * ny;
+            nym = (j-1) + (i-1) * ny;
+            nyp = (j+1) + (i-1) * ny;
+
+            rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+            rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+            rym = (cMap(i,j) + cMap(i,j-1))/2.0;
+            ryp = (cMap(i,j) + cMap(i,j+1))/2.0;
+
+            G(n,n) = -(rxm + rxp + rym + ryp);
+            G(n,nxm) = rxm;
+            G(n,nxp) = rxp;
+            G(n, nym) = rym;
+            G(n, nyp) = ryp;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">% Using Finite Difference</span>
+
+V = G\F';
+
+<span class="keyword">for</span> i = 1:nx
+    <span class="keyword">for</span> j = 1:ny
+        n = j + (i-1) * ny;
+        VG(i,j) = V(n);
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+figure
+set(surf(VG),<span class="string">'linestyle'</span>, <span class="string">'none'</span>);
+</pre><img vspace="5" hspace="5" src="publisher_01.png" alt=""> <h2 id="4">(b) Case where V = Vo at x = 0, x = L and V = 0 at y = 0, y = W;</h2><pre class="codeinput">clearvars
+clearvars <span class="string">-GLOBAL</span>
+close <span class="string">all</span>
+<span class="comment">%set(0,'DefaultFigureWindowStyle', 'docked')</span>
+
+nx = 75;
+ny = 50;
+
+CuCond = 1.7e-8;
+
+<span class="comment">%Conductivity map</span>
+
+cMap = zeros(nx,ny);
+
+<span class="keyword">for</span> i = 1:nx
+    <span class="keyword">for</span> j = 1: ny
+        cMap(i,j) = CuCond;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+G = sparse(nx*ny, nx*ny);
+F = zeros(1, nx*ny);
+
+<span class="keyword">for</span> i = 1:nx
+    <span class="keyword">for</span> j = 1:ny
+        n = j + (i - 1) * ny;
+
+        <span class="keyword">if</span> i == 1
+            G(n,:) = 0;
+            G(n,n) = 1;
+             F(n) = 1;
+
+        <span class="keyword">elseif</span> i == nx
+             G(n,:) = 0;
+             G(n,n) = 1;
+
+             F(n) = 1;
+
+
+        <span class="keyword">elseif</span> j == 1
+            G(n,:) = 0;
+            G(n,n) = 1;
+             F(n) = 0;
+        <span class="keyword">elseif</span> j == ny
+            G(n,:) = 0;
+            G(n,n) = 1;
+             F(n) = 0;
+        <span class="keyword">else</span>
+            nxm = j + (i-2) * ny;
+            nxp = j + (i) * ny;
+            nym = (j-1) + (i-1) * ny;
+            nyp = (j+1) + (i-1) * ny;
+
+            rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+            rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+            rym = (cMap(i,j) + cMap(i,j-1))/2.0;
+            ryp = (cMap(i,j) + cMap(i,j+1))/2.0;
+
+            G(n,n) = -(rxm + rxp + rym + ryp);
+            G(n,nxm) = rxm;
+            G(n,nxp) = rxp;
+            G(n, nym) = rym;
+            G(n, nyp) = ryp;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">% V using Finite Difference Method</span>
+
+V = G\F';
+
+<span class="keyword">for</span> i = 1:nx
+    <span class="keyword">for</span> j = 1:ny
+        n = j + (i-1) * ny;
+        VG(i,j) = V(n);
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+figure
+subplot(2,1,1);
+set(surf(VG),<span class="string">'linestyle'</span>, <span class="string">'none'</span>);
+
+<span class="comment">% V using the Analytical Series Method</span>
+
+N =101;
+
+a = ny;
+b = nx/2;
+VpSig = zeros(nx,ny);
+
+x = linspace(-b,b,nx);
+y = linspace(0,a,ny);
+
+VSig = zeros(nx,ny);
+<span class="keyword">for</span> k = 1:2:N
+    <span class="keyword">for</span> i = 1:nx
+        <span class="keyword">for</span> j = 1:ny
+            VpSig(i,j) = ((4*1)/pi) * (1/k) * ((cosh((k*pi*x(i))/a))/(cosh((k*pi*b)/a))) * sin((k*pi*y(j))/a);
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    VSig = (VSig + VpSig);
+    subplot(2,1,2);
+
+    surf(VSig)
+    pause(0.1)
+<span class="keyword">end</span>
+</pre><img vspace="5" hspace="5" src="publisher_02.png" alt=""> <p>Both analytical and numerical show similar responses. Curved edges in the analytical plot show that the analytical simulation will need a lot itereations to get a precise answer. The multiple iterations may or may not allow the simulation to converge at a final solution.</p><h2 id="6">Question 2</h2><p>(a) Plots are shown below</p><pre class="codeinput">clearvars
+clearvars <span class="string">-GLOBAL</span>
+close <span class="string">all</span>
+set(0,<span class="string">'DefaultFigureWindowStyle'</span>, <span class="string">'docked'</span>)
+
+<span class="keyword">global</span> C
+<span class="keyword">global</span> CuCond NoCond
+<span class="keyword">global</span> nx ny
+
+C.q_0 = 1.60217653e-19;             <span class="comment">% electron charge</span>
+C.hb = 1.054571596e-34;             <span class="comment">% Dirac constant</span>
+C.h = C.hb * 2 * pi;                    <span class="comment">% Planck constant</span>
+C.m_0 = 9.10938215e-31;             <span class="comment">% electron mass</span>
+C.kb = 1.3806504e-23;               <span class="comment">% Boltzmann constant</span>
+C.eps_0 = 8.854187817e-12;          <span class="comment">% vacuum permittivity</span>
+C.mu_0 = 1.2566370614e-6;           <span class="comment">% vacuum permeability</span>
+C.c = 299792458;                    <span class="comment">% speed of light</span>
+C.g = 9.80665;                      <span class="comment">% metres (32.1740 ft) per s&sup2;</span>
+
+nx = 50;
+ny = 50;
+
+Lb = floor(nx/3);
+Wb = floor(ny/3);
+
+
+CuCond = 100;
+NoCond = 10e-9;
+
+<span class="comment">%Conductivity map</span>
+
+cMap = zeros(nx,ny);
+
+<span class="keyword">for</span> i = 1:nx
+    <span class="keyword">for</span> j = 1: ny
+        cMap(i,j) = CuCond;
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="keyword">for</span> i = 1:nx
+    <span class="keyword">for</span> j = 1:ny
+        <span class="keyword">if</span> (i&gt;=1 &amp;&amp; i&lt;=Wb &amp;&amp; j&gt;Lb &amp;&amp; j&lt;=(2*Lb))
+            cMap(i,j) = NoCond;
+        <span class="keyword">end</span>
+
+        <span class="keyword">if</span> (i&lt;=ny &amp;&amp; i&gt;=(ny-Wb) &amp;&amp; j&gt;Lb &amp;&amp; j&lt;=(2*Lb))
+            cMap(i,j) = NoCond;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+G = sparse(nx*ny, nx*ny);
+F = zeros(1, nx*ny);
+
+<span class="comment">% V using Finite Difference Method</span>
+<span class="keyword">for</span> i = 1:nx
+    <span class="keyword">for</span> j = 1:ny
+        n = j + (i - 1) * ny;
+
+        <span class="keyword">if</span> i == 1
+            G(n,:) = 0;
+            G(n,n) = 1;
+             F(n) = 1;
+
+        <span class="keyword">elseif</span> i == nx
+             G(n,:) = 0;
+             G(n,n) = 1;
+
+        <span class="keyword">elseif</span> j == 1
+            nxm = j + (i-2) * ny;
+            nxp = j + (i) * ny;
+            nyp = (j+1) + (i-1) * ny;
+
+            rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+            rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+            ryp = (cMap(i,j) + cMap(i,j+1))/2.0;
+
+            G(n,n) = -(rxm + rxp + ryp);
+            G(n,nxm) = rxm;
+            G(n,nxp) = rxp;
+            G(n, nyp) = ryp;
+
+        <span class="keyword">elseif</span> j == ny
+            nxm = j + (i-2) * ny;
+            nxp = j + (i) * ny;
+            nym = (j-1) + (i-1) * ny;
+
+            rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+            rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+            rym = (cMap(i,j) + cMap(i,j-1))/2.0;
+
+            G(n,n) = -(rxm + rxp + rym);
+            G(n,nxm) = rxm;
+            G(n,nxp) = rxp;
+            G(n, nym) = rym;
+
+        <span class="keyword">else</span>
+            nxm = j + (i-2) * ny;
+            nxp = j + (i) * ny;
+            nym = (j-1) + (i-1) * ny;
+            nyp = (j+1) + (i-1) * ny;
+
+            rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+            rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+            rym = (cMap(i,j) + cMap(i,j-1))/2.0;
+            ryp = (cMap(i,j) + cMap(i,j+1))/2.0;
+
+            G(n,n) = -(rxm + rxp + rym + ryp);
+            G(n,nxm) = rxm;
+            G(n,nxp) = rxp;
+            G(n, nym) = rym;
+            G(n, nyp) = ryp;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+V = G\F';
+
+<span class="keyword">for</span> i = 1:nx
+    <span class="keyword">for</span> j = 1:ny
+        n = j + (i-1) * ny;
+        VG(i,j) = V(n);
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+<span class="comment">% V using the Analytical Series Method</span>
+
+N =101;
+
+a = ny;
+b = nx/2;
+VpSig = zeros(nx,ny);
+
+<span class="keyword">for</span> i = 1:nx
+    <span class="keyword">for</span> j = 1:ny
+        <span class="keyword">if</span> i == 1
+            Ex(i, j) = (VG(i + 1, j) - VG(i, j));
+        <span class="keyword">elseif</span> i == nx
+            Ex(i, j) = (VG(i, j) - VG(i - 1, j));
+        <span class="keyword">else</span>
+            Ex(i, j) = (VG(i + 1, j) - VG(i - 1, j)) * 0.5;
+        <span class="keyword">end</span>
+        <span class="keyword">if</span> j == 1
+            Ey(i, j) = (VG(i, j + 1) - VG(i, j));
+        <span class="keyword">elseif</span> j == ny
+            Ey(i, j) = (VG(i, j) - VG(i, j - 1));
+        <span class="keyword">else</span>
+            Ey(i, j) = (VG(i, j + 1) - VG(i, j - 1)) * 0.5;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+<span class="keyword">end</span>
+
+Ex = -Ex;
+Ey = -Ey;
+
+Jx = cMap .* Ex;
+Jy = cMap .* Ey;
+
+figure
+
+H = surf(cMap');
+title(<span class="string">'Conductivity Map'</span>)
+set(H, <span class="string">'linestyle'</span>, <span class="string">'none'</span>);
+view(0, 90)
+
+figure
+H = surf(VG');
+title(<span class="string">'Vmap with bottle neck'</span>)
+set(H, <span class="string">'linestyle'</span>, <span class="string">'none'</span>);
+
+view(0, 90)
+
+figure
+quiver(Ex', Ey');
+title(<span class="string">'Electric field Map'</span>)
+axis([0 nx 0 ny]);
+
+figure
+quiver(Jx', Jy');
+title(<span class="string">'Current Density Map'</span>)
+axis([0 nx 0 ny]);
+
+C0 = sum(Jx(1, :));
+Cnx = sum(Jx(nx, :));
+Curr = (C0 + Cnx) * 0.5;
+</pre><img vspace="5" hspace="5" src="publisher_03.png" alt=""> <img vspace="5" hspace="5" src="publisher_04.png" alt=""> <img vspace="5" hspace="5" src="publisher_05.png" alt=""> <img vspace="5" hspace="5" src="publisher_06.png" alt=""> <h2 id="7">Graph of current vs mesh size</h2><pre class="codeinput">clearvars
+clearvars <span class="string">-GLOBAL</span>
+close <span class="string">all</span>
+set(0,<span class="string">'DefaultFigureWindowStyle'</span>, <span class="string">'docked'</span>)
+
+<span class="keyword">global</span> C
+<span class="keyword">global</span> CuCond NoCond
+<span class="keyword">global</span> nx ny
+
+C.q_0 = 1.60217653e-19;             <span class="comment">% electron charge</span>
+C.hb = 1.054571596e-34;             <span class="comment">% Dirac constant</span>
+C.h = C.hb * 2 * pi;                    <span class="comment">% Planck constant</span>
+C.m_0 = 9.10938215e-31;             <span class="comment">% electron mass</span>
+C.kb = 1.3806504e-23;               <span class="comment">% Boltzmann constant</span>
+C.eps_0 = 8.854187817e-12;          <span class="comment">% vacuum permittivity</span>
+C.mu_0 = 1.2566370614e-6;           <span class="comment">% vacuum permeability</span>
+C.c = 299792458;                    <span class="comment">% speed of light</span>
+C.g = 9.80665;                      <span class="comment">% metres (32.1740 ft) per s&sup2;</span>
+
+nx = 20;
+ny = 20;
+startSim = 20;
+limitSim = 100;
+
+Curr = zeros(1,limitSim);
+Meshsizes = zeros(1,limitSim);
+neckBT = zeros(1,limitSim);
+
+<span class="keyword">for</span> u = 1:limitSim
+
+    Meshsizes(u) = nx;
+
+    Lb = floor(nx/3);
+    Wb = floor(ny/3);
+
+
+    CuCond = 1;
+    NoCond = 10e-2;
+
+    <span class="comment">%Conductivity map</span>
+
+    cMap = zeros(nx,ny);
+
+    <span class="keyword">for</span> i = 1:nx
+        <span class="keyword">for</span> j = 1: ny
+            cMap(i,j) = CuCond;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+    <span class="keyword">for</span> i = 1:nx
+        <span class="keyword">for</span> j = 1:ny
+            <span class="keyword">if</span> (i&gt;=1 &amp;&amp; i&lt;=Wb &amp;&amp; j&gt;Lb &amp;&amp; j&lt;=(2*Lb))
+                cMap(i,j) = NoCond;
+            <span class="keyword">end</span>
+
+            <span class="keyword">if</span> (i&lt;=ny &amp;&amp; i&gt;=(ny-Wb) &amp;&amp; j&gt;Lb &amp;&amp; j&lt;=(2*Lb))
+                cMap(i,j) = NoCond;
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+    G = sparse(nx*ny, nx*ny);
+    F = zeros(1, nx*ny);
+
+    <span class="keyword">for</span> i = 1:nx
+        <span class="keyword">for</span> j = 1:ny
+            n = j + (i - 1) * ny;
+
+            <span class="keyword">if</span> i == 1
+                G(n,:) = 0;
+                G(n,n) = 1;
+                F(n) = 1;
+
+            <span class="keyword">elseif</span> i == nx
+                G(n,:) = 0;
+                G(n,n) = 1;
+
+            <span class="keyword">elseif</span> j == 1
+                nxm = j + (i-2) * ny;
+                nxp = j + (i) * ny;
+                nyp = (j+1) + (i-1) * ny;
+
+                rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+                rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+                ryp = (cMap(i,j) + cMap(i,j+1))/2.0;
+
+                G(n,n) = -(rxm + rxp + ryp);
+                G(n,nxm) = rxm;
+                G(n,nxp) = rxp;
+                G(n, nyp) = ryp;
+
+            <span class="keyword">elseif</span> j == ny
+                nxm = j + (i-2) * ny;
+                nxp = j + (i) * ny;
+                nym = (j-1) + (i-1) * ny;
+
+                rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+                rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+                rym = (cMap(i,j) + cMap(i,j-1))/2.0;
+
+                G(n,n) = -(rxm + rxp + rym);
+                G(n,nxm) = rxm;
+                G(n,nxp) = rxp;
+                G(n, nym) = rym;
+
+            <span class="keyword">else</span>
+                nxm = j + (i-2) * ny;
+                nxp = j + (i) * ny;
+                nym = (j-1) + (i-1) * ny;
+                nyp = (j+1) + (i-1) * ny;
+
+                rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+                rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+                rym = (cMap(i,j) + cMap(i,j-1))/2.0;
+                ryp = (cMap(i,j) + cMap(i,j+1))/2.0;
+
+                G(n,n) = -(rxm + rxp + rym + ryp);
+                G(n,nxm) = rxm;
+                G(n,nxp) = rxp;
+                G(n, nym) = rym;
+                G(n, nyp) = ryp;
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    V = G\F';
+
+    <span class="keyword">for</span> i = 1:nx
+        <span class="keyword">for</span> j = 1:ny
+            n = j + (i-1) * ny;
+            VG(i,j) = V(n);
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+    <span class="keyword">for</span> i = 1:nx
+        <span class="keyword">for</span> j = 1:ny
+            <span class="keyword">if</span> i == 1
+                Ex(i, j) = (VG(i + 1, j) - VG(i, j));
+            <span class="keyword">elseif</span> i == nx
+                Ex(i, j) = (VG(i, j) - VG(i - 1, j));
+            <span class="keyword">else</span>
+                Ex(i, j) = (VG(i + 1, j) - VG(i - 1, j)) * 0.5;
+            <span class="keyword">end</span>
+            <span class="keyword">if</span> j == 1
+                Ey(i, j) = (VG(i, j + 1) - VG(i, j));
+            <span class="keyword">elseif</span> j == ny
+                Ey(i, j) = (VG(i, j) - VG(i, j - 1));
+            <span class="keyword">else</span>
+                Ey(i, j) = (VG(i, j + 1) - VG(i, j - 1)) * 0.5;
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+    Ex = -Ex;
+    Ey = -Ey;
+
+    Jx = cMap .* Ex;
+    Jy = cMap .* Ey;
+
+    C0 = sum(Jx(1, :));
+    Cnx = sum(Jx(nx, :));
+
+    <span class="comment">%Current</span>
+    Curr(u) = (C0 + Cnx) * 0.5;
+
+    <span class="comment">%Sizes</span>
+    nx = nx+1;
+    ny = ny+1;
+<span class="keyword">end</span>
+
+<span class="comment">%Current vs Mesh Size</span>
+figure
+plot(Meshsizes, Curr);
+title(<span class="string">'Current vs Mesh Size'</span>)
+xlabel(<span class="string">'Mesh size'</span>)
+ylabel(<span class="string">'Current (A)'</span>)
+</pre><img vspace="5" hspace="5" src="publisher_07.png" alt=""> <h2 id="8">Current vs bottle Neck</h2><pre class="codeinput">clearvars
+clearvars <span class="string">-GLOBAL</span>
+close <span class="string">all</span>
+set(0,<span class="string">'DefaultFigureWindowStyle'</span>, <span class="string">'docked'</span>)
+
+<span class="keyword">global</span> C
+<span class="keyword">global</span> CuCond NoCond
+<span class="keyword">global</span> nx ny
+
+C.q_0 = 1.60217653e-19;             <span class="comment">% electron charge</span>
+C.hb = 1.054571596e-34;             <span class="comment">% Dirac constant</span>
+C.h = C.hb * 2 * pi;                    <span class="comment">% Planck constant</span>
+C.m_0 = 9.10938215e-31;             <span class="comment">% electron mass</span>
+C.kb = 1.3806504e-23;               <span class="comment">% Boltzmann constant</span>
+C.eps_0 = 8.854187817e-12;          <span class="comment">% vacuum permittivity</span>
+C.mu_0 = 1.2566370614e-6;           <span class="comment">% vacuum permeability</span>
+C.c = 299792458;                    <span class="comment">% speed of light</span>
+C.g = 9.80665;                      <span class="comment">% metres (32.1740 ft) per s&sup2;</span>
+
+nx = 100;
+ny = 100;
+startSim = 20;
+limitSim = 100;
+
+Curr = zeros(1,limitSim);
+Necksizes = zeros(1,limitSim);
+
+Lb = floor(nx/3);
+Wb = floor(ny/3);
+
+<span class="keyword">for</span> u = 1:limitSim
+
+    Necksizes(u) = Wb;
+
+    CuCond = 1;
+    NoCond = 10e-2;
+
+    <span class="comment">%Conductivity map</span>
+
+    cMap = zeros(nx,ny);
+
+    <span class="keyword">for</span> i = 1:nx
+        <span class="keyword">for</span> j = 1: ny
+            cMap(i,j) = CuCond;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+    <span class="keyword">for</span> i = 1:nx
+        <span class="keyword">for</span> j = 1:ny
+            <span class="keyword">if</span> (i&gt;=1 &amp;&amp; i&lt;=Wb &amp;&amp; j&gt;Lb &amp;&amp; j&lt;=(2*Lb))
+                cMap(i,j) = NoCond;
+            <span class="keyword">end</span>
+
+            <span class="keyword">if</span> (i&lt;=ny &amp;&amp; i&gt;=(ny-Wb) &amp;&amp; j&gt;Lb &amp;&amp; j&lt;=(2*Lb))
+                cMap(i,j) = NoCond;
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+    G = sparse(nx*ny, nx*ny);
+    F = zeros(1, nx*ny);
+
+    <span class="keyword">for</span> i = 1:nx
+        <span class="keyword">for</span> j = 1:ny
+            n = j + (i - 1) * ny;
+
+            <span class="keyword">if</span> i == 1
+                G(n,:) = 0;
+                G(n,n) = 1;
+                F(n) = 1;
+
+            <span class="keyword">elseif</span> i == nx
+                G(n,:) = 0;
+                G(n,n) = 1;
+
+            <span class="keyword">elseif</span> j == 1
+                nxm = j + (i-2) * ny;
+                nxp = j + (i) * ny;
+                nyp = (j+1) + (i-1) * ny;
+
+                rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+                rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+                ryp = (cMap(i,j) + cMap(i,j+1))/2.0;
+
+                G(n,n) = -(rxm + rxp + ryp);
+                G(n,nxm) = rxm;
+                G(n,nxp) = rxp;
+                G(n, nyp) = ryp;
+
+            <span class="keyword">elseif</span> j == ny
+                nxm = j + (i-2) * ny;
+                nxp = j + (i) * ny;
+                nym = (j-1) + (i-1) * ny;
+
+                rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+                rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+                rym = (cMap(i,j) + cMap(i,j-1))/2.0;
+
+                G(n,n) = -(rxm + rxp + rym);
+                G(n,nxm) = rxm;
+                G(n,nxp) = rxp;
+                G(n, nym) = rym;
+
+            <span class="keyword">else</span>
+                nxm = j + (i-2) * ny;
+                nxp = j + (i) * ny;
+                nym = (j-1) + (i-1) * ny;
+                nyp = (j+1) + (i-1) * ny;
+
+                rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+                rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+                rym = (cMap(i,j) + cMap(i,j-1))/2.0;
+                ryp = (cMap(i,j) + cMap(i,j+1))/2.0;
+
+                G(n,n) = -(rxm + rxp + rym + ryp);
+                G(n,nxm) = rxm;
+                G(n,nxp) = rxp;
+                G(n, nym) = rym;
+                G(n, nyp) = ryp;
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    V = G\F';
+
+    <span class="keyword">for</span> i = 1:nx
+        <span class="keyword">for</span> j = 1:ny
+            n = j + (i-1) * ny;
+            VG(i,j) = V(n);
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+    <span class="keyword">for</span> i = 1:nx
+        <span class="keyword">for</span> j = 1:ny
+            <span class="keyword">if</span> i == 1
+                Ex(i, j) = (VG(i + 1, j) - VG(i, j));
+            <span class="keyword">elseif</span> i == nx
+                Ex(i, j) = (VG(i, j) - VG(i - 1, j));
+            <span class="keyword">else</span>
+                Ex(i, j) = (VG(i + 1, j) - VG(i - 1, j)) * 0.5;
+            <span class="keyword">end</span>
+            <span class="keyword">if</span> j == 1
+                Ey(i, j) = (VG(i, j + 1) - VG(i, j));
+            <span class="keyword">elseif</span> j == ny
+                Ey(i, j) = (VG(i, j) - VG(i, j - 1));
+            <span class="keyword">else</span>
+                Ey(i, j) = (VG(i, j + 1) - VG(i, j - 1)) * 0.5;
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+    Ex = -Ex;
+    Ey = -Ey;
+
+    Jx = cMap .* Ex;
+    Jy = cMap .* Ey;
+
+    C0 = sum(Jx(1, :));
+    Cnx = sum(Jx(nx, :));
+
+    <span class="comment">%Current</span>
+    Curr(u) = (C0 + Cnx) * 0.5;
+
+    <span class="comment">%Bottle Neck</span>
+    Necksizes(u) = ny - (2*Wb);
+
+    <span class="comment">%Sizes</span>
+    Wb = Wb+1;
+<span class="keyword">end</span>
+
+<span class="comment">%Current vs Neck Size</span>
+figure
+plot(Necksizes, Curr);
+title(<span class="string">'Current vs bottle-necks'</span>)
+xlabel(<span class="string">'Bottle neck width'</span>)
+ylabel(<span class="string">'Current (A)'</span>)
+</pre><img vspace="5" hspace="5" src="publisher_08.png" alt=""> <p>Negative botle neck sizes represent neck overlaps.</p><h2 id="10">Current vs Conductivity</h2><pre class="codeinput">clearvars
+clearvars <span class="string">-GLOBAL</span>
+close <span class="string">all</span>
+set(0,<span class="string">'DefaultFigureWindowStyle'</span>, <span class="string">'docked'</span>)
+
+<span class="keyword">global</span> C
+<span class="keyword">global</span> CuCond NoCond
+<span class="keyword">global</span> nx ny
+
+C.q_0 = 1.60217653e-19;             <span class="comment">% electron charge</span>
+C.hb = 1.054571596e-34;             <span class="comment">% Dirac constant</span>
+C.h = C.hb * 2 * pi;                    <span class="comment">% Planck constant</span>
+C.m_0 = 9.10938215e-31;             <span class="comment">% electron mass</span>
+C.kb = 1.3806504e-23;               <span class="comment">% Boltzmann constant</span>
+C.eps_0 = 8.854187817e-12;          <span class="comment">% vacuum permittivity</span>
+C.mu_0 = 1.2566370614e-6;           <span class="comment">% vacuum permeability</span>
+C.c = 299792458;                    <span class="comment">% speed of light</span>
+C.g = 9.80665;                      <span class="comment">% metres (32.1740 ft) per s&sup2;</span>
+
+nx = 100;
+ny = 100;
+startSim = 20;
+limitSim = 100;
+
+Curr = zeros(1,limitSim);
+CuCondVal = zeros(1,limitSim);
+
+Lb = floor(nx/3);
+Wb = floor(ny/3);
+
+<span class="keyword">for</span> i = 1:limitSim
+    CuCondVal(i) = i;
+<span class="keyword">end</span>
+
+<span class="keyword">for</span> u = 1:limitSim
+
+    CuCond = CuCondVal(u);
+    NoCond = 10e-2;
+
+    <span class="comment">%Conductivity map</span>
+
+    cMap = zeros(nx,ny);
+
+    <span class="keyword">for</span> i = 1:nx
+        <span class="keyword">for</span> j = 1: ny
+            cMap(i,j) = CuCond;
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+    <span class="keyword">for</span> i = 1:nx
+        <span class="keyword">for</span> j = 1:ny
+            <span class="keyword">if</span> (i&gt;=1 &amp;&amp; i&lt;=Wb &amp;&amp; j&gt;Lb &amp;&amp; j&lt;=(2*Lb))
+                cMap(i,j) = NoCond;
+            <span class="keyword">end</span>
+
+            <span class="keyword">if</span> (i&lt;=ny &amp;&amp; i&gt;=(ny-Wb) &amp;&amp; j&gt;Lb &amp;&amp; j&lt;=(2*Lb))
+                cMap(i,j) = NoCond;
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+    G = sparse(nx*ny, nx*ny);
+    F = zeros(1, nx*ny);
+
+    <span class="keyword">for</span> i = 1:nx
+        <span class="keyword">for</span> j = 1:ny
+            n = j + (i - 1) * ny;
+
+            <span class="keyword">if</span> i == 1
+                G(n,:) = 0;
+                G(n,n) = 1;
+                F(n) = 1;
+
+            <span class="keyword">elseif</span> i == nx
+                G(n,:) = 0;
+                G(n,n) = 1;
+
+            <span class="keyword">elseif</span> j == 1
+                nxm = j + (i-2) * ny;
+                nxp = j + (i) * ny;
+                nyp = (j+1) + (i-1) * ny;
+
+                rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+                rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+                ryp = (cMap(i,j) + cMap(i,j+1))/2.0;
+
+                G(n,n) = -(rxm + rxp + ryp);
+                G(n,nxm) = rxm;
+                G(n,nxp) = rxp;
+                G(n, nyp) = ryp;
+
+            <span class="keyword">elseif</span> j == ny
+                nxm = j + (i-2) * ny;
+                nxp = j + (i) * ny;
+                nym = (j-1) + (i-1) * ny;
+
+                rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+                rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+                rym = (cMap(i,j) + cMap(i,j-1))/2.0;
+
+                G(n,n) = -(rxm + rxp + rym);
+                G(n,nxm) = rxm;
+                G(n,nxp) = rxp;
+                G(n, nym) = rym;
+
+            <span class="keyword">else</span>
+                nxm = j + (i-2) * ny;
+                nxp = j + (i) * ny;
+                nym = (j-1) + (i-1) * ny;
+                nyp = (j+1) + (i-1) * ny;
+
+                rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+                rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+                rym = (cMap(i,j) + cMap(i,j-1))/2.0;
+                ryp = (cMap(i,j) + cMap(i,j+1))/2.0;
+
+                G(n,n) = -(rxm + rxp + rym + ryp);
+                G(n,nxm) = rxm;
+                G(n,nxp) = rxp;
+                G(n, nym) = rym;
+                G(n, nyp) = ryp;
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+    V = G\F';
+
+    <span class="keyword">for</span> i = 1:nx
+        <span class="keyword">for</span> j = 1:ny
+            n = j + (i-1) * ny;
+            VG(i,j) = V(n);
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+    <span class="keyword">for</span> i = 1:nx
+        <span class="keyword">for</span> j = 1:ny
+            <span class="keyword">if</span> i == 1
+                Ex(i, j) = (VG(i + 1, j) - VG(i, j));
+            <span class="keyword">elseif</span> i == nx
+                Ex(i, j) = (VG(i, j) - VG(i - 1, j));
+            <span class="keyword">else</span>
+                Ex(i, j) = (VG(i + 1, j) - VG(i - 1, j)) * 0.5;
+            <span class="keyword">end</span>
+            <span class="keyword">if</span> j == 1
+                Ey(i, j) = (VG(i, j + 1) - VG(i, j));
+            <span class="keyword">elseif</span> j == ny
+                Ey(i, j) = (VG(i, j) - VG(i, j - 1));
+            <span class="keyword">else</span>
+                Ey(i, j) = (VG(i, j + 1) - VG(i, j - 1)) * 0.5;
+            <span class="keyword">end</span>
+        <span class="keyword">end</span>
+    <span class="keyword">end</span>
+
+    Ex = -Ex;
+    Ey = -Ey;
+
+    Jx = cMap .* Ex;
+    Jy = cMap .* Ey;
+
+    C0 = sum(Jx(1, :));
+    Cnx = sum(Jx(nx, :));
+
+    <span class="comment">%Current</span>
+    Curr(u) = (C0 + Cnx) * 0.5;
+
+<span class="keyword">end</span>
+
+<span class="comment">%Current vs Neck Size</span>
+figure
+plot(CuCondVal, Curr);
+title(<span class="string">'Current vs Conductivity'</span>)
+xlabel(<span class="string">'Conductivity'</span>)
+ylabel(<span class="string">'Current (A)'</span>)
+</pre><img vspace="5" hspace="5" src="publisher_09.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% ASSIGNMENT TWO - ELEC 4700
+%% Joseph Kingsley A.Amiah
+%% Question 1
+%% (a) Case where V = Vo at x = 0 and V = 0 at x = L;
+%
+% The Code
+
+clearvars
+clearvars -GLOBAL
+close all
+%set(0,'DefaultFigureWindowStyle', 'docked')
+
+global C
+global CuCond
+global nx ny
+
+C.q_0 = 1.60217653e-19;             % electron charge
+C.hb = 1.054571596e-34;             % Dirac constant
+C.h = C.hb * 2 * pi;                    % Planck constant
+C.m_0 = 9.10938215e-31;             % electron mass
+C.kb = 1.3806504e-23;               % Boltzmann constant
+C.eps_0 = 8.854187817e-12;          % vacuum permittivity
+C.mu_0 = 1.2566370614e-6;           % vacuum permeability
+C.c = 299792458;                    % speed of light
+C.g = 9.80665;                      % metres (32.1740 ft) per s²
+
+nx = 75;
+ny = 50;
+
+CuCond = 1.7e-8;
+
+%Conductivity Map
+
+cMap = zeros(nx,ny);
+
+for i = 1:nx
+    for j = 1: ny
+        cMap(i,j) = CuCond;
+    end
+end
+
+G = sparse(nx*ny, nx*ny);
+F = zeros(1, nx*ny);
+
+% G - Matrix Formulation
+
+for i = 1:nx
+    for j = 1:ny
+        n = j + (i - 1) * ny;
+        
+        if i == 1
+            G(n,:) = 0;
+            G(n,n) = 1;
+             F(n) = 1;
+            
+        elseif i == nx
+             G(n,:) = 0;
+             G(n,n) = 1;
+        
+        elseif j == 1
+            nxm = j + (i-2) * ny;
+            nxp = j + (i) * ny;
+            nyp = (j+1) + (i-1) * ny;
+            
+            rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+            rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+            ryp = (cMap(i,j) + cMap(i,j+1))/2.0;
+            
+            G(n,n) = -(rxm + rxp + ryp); 
+            G(n,nxm) = rxm;
+            G(n,nxp) = rxp;
+            G(n, nyp) = ryp;
+              
+        elseif j == ny
+            nxm = j + (i-2) * ny;
+            nxp = j + (i) * ny;
+            nym = (j-1) + (i-1) * ny;
+            
+            rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+            rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+            rym = (cMap(i,j) + cMap(i,j-1))/2.0;
+            
+            G(n,n) = -(rxm + rxp + rym);
+            G(n,nxm) = rxm;
+            G(n,nxp) = rxp;
+            G(n, nym) = rym;
+      
+        else
+            nxm = j + (i-2) * ny;
+            nxp = j + (i) * ny;
+            nym = (j-1) + (i-1) * ny;
+            nyp = (j+1) + (i-1) * ny;
+            
+            rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+            rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+            rym = (cMap(i,j) + cMap(i,j-1))/2.0;
+            ryp = (cMap(i,j) + cMap(i,j+1))/2.0;
+            
+            G(n,n) = -(rxm + rxp + rym + ryp);
+            G(n,nxm) = rxm;
+            G(n,nxp) = rxp;
+            G(n, nym) = rym;
+            G(n, nyp) = ryp;
+        end
+    end
+end
+
+% Using Finite Difference
+
+V = G\F';
+
+for i = 1:nx
+    for j = 1:ny
+        n = j + (i-1) * ny;
+        VG(i,j) = V(n);
+    end   
+end
+
+figure
+set(surf(VG),'linestyle', 'none');
+
+%% (b) Case where V = Vo at x = 0, x = L and V = 0 at y = 0, y = W;
+clearvars
+clearvars -GLOBAL
+close all
+%set(0,'DefaultFigureWindowStyle', 'docked')
+
+nx = 75;
+ny = 50;
+
+CuCond = 1.7e-8;
+
+%Conductivity map
+
+cMap = zeros(nx,ny);
+
+for i = 1:nx
+    for j = 1: ny
+        cMap(i,j) = CuCond;
+    end
+end
+
+G = sparse(nx*ny, nx*ny);
+F = zeros(1, nx*ny);
+
+for i = 1:nx
+    for j = 1:ny
+        n = j + (i - 1) * ny;
+        
+        if i == 1
+            G(n,:) = 0;
+            G(n,n) = 1;
+             F(n) = 1;
+            
+        elseif i == nx
+             G(n,:) = 0;
+             G(n,n) = 1;
+
+             F(n) = 1;
+          
+        
+        elseif j == 1
+            G(n,:) = 0;
+            G(n,n) = 1;
+             F(n) = 0;
+        elseif j == ny
+            G(n,:) = 0;
+            G(n,n) = 1;
+             F(n) = 0;
+        else
+            nxm = j + (i-2) * ny;
+            nxp = j + (i) * ny;
+            nym = (j-1) + (i-1) * ny;
+            nyp = (j+1) + (i-1) * ny;
+            
+            rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+            rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+            rym = (cMap(i,j) + cMap(i,j-1))/2.0;
+            ryp = (cMap(i,j) + cMap(i,j+1))/2.0;
+            
+            G(n,n) = -(rxm + rxp + rym + ryp);
+            G(n,nxm) = rxm;
+            G(n,nxp) = rxp;
+            G(n, nym) = rym;
+            G(n, nyp) = ryp;
+        end
+    end
+end
+
+% V using Finite Difference Method
+
+V = G\F';
+
+for i = 1:nx
+    for j = 1:ny
+        n = j + (i-1) * ny;
+        VG(i,j) = V(n);
+    end   
+end
+figure
+subplot(2,1,1);
+set(surf(VG),'linestyle', 'none');
+
+% V using the Analytical Series Method
+
+N =101;
+
+a = ny;
+b = nx/2;
+VpSig = zeros(nx,ny);
+
+x = linspace(-b,b,nx);
+y = linspace(0,a,ny);
+
+VSig = zeros(nx,ny);
+for k = 1:2:N
+    for i = 1:nx
+        for j = 1:ny
+            VpSig(i,j) = ((4*1)/pi) * (1/k) * ((cosh((k*pi*x(i))/a))/(cosh((k*pi*b)/a))) * sin((k*pi*y(j))/a);
+        end    
+    end
+    VSig = (VSig + VpSig);
+    subplot(2,1,2);
+   
+    surf(VSig)
+    pause(0.1)
+end
+%%
+% Both analytical and numerical show similar responses. Curved edges 
+% in the analytical plot show that the analytical simulation will need a
+% lot itereations to get a precise answer. The multiple iterations may or
+% may not allow the simulation to converge at a final solution. 
+
+%% Question 2
+% (a) Plots are shown below
+clearvars
+clearvars -GLOBAL
+close all
+set(0,'DefaultFigureWindowStyle', 'docked')
+
+global C
+global CuCond NoCond
+global nx ny
+
+C.q_0 = 1.60217653e-19;             % electron charge
+C.hb = 1.054571596e-34;             % Dirac constant
+C.h = C.hb * 2 * pi;                    % Planck constant
+C.m_0 = 9.10938215e-31;             % electron mass
+C.kb = 1.3806504e-23;               % Boltzmann constant
+C.eps_0 = 8.854187817e-12;          % vacuum permittivity
+C.mu_0 = 1.2566370614e-6;           % vacuum permeability
+C.c = 299792458;                    % speed of light
+C.g = 9.80665;                      % metres (32.1740 ft) per s²
+
+nx = 50;
+ny = 50;
+
+Lb = floor(nx/3);
+Wb = floor(ny/3);
+
+
+CuCond = 100;
+NoCond = 10e-9;
+
+%Conductivity map
+
+cMap = zeros(nx,ny);
+
+for i = 1:nx
+    for j = 1: ny
+        cMap(i,j) = CuCond;
+    end
+end
+
+for i = 1:nx
+    for j = 1:ny
+        if (i>=1 && i<=Wb && j>Lb && j<=(2*Lb))
+            cMap(i,j) = NoCond;
+        end
+        
+        if (i<=ny && i>=(ny-Wb) && j>Lb && j<=(2*Lb))
+            cMap(i,j) = NoCond;
+        end
+    end
+end 
+
+G = sparse(nx*ny, nx*ny);
+F = zeros(1, nx*ny);
+
+% V using Finite Difference Method
+for i = 1:nx
+    for j = 1:ny
+        n = j + (i - 1) * ny;
+        
+        if i == 1
+            G(n,:) = 0;
+            G(n,n) = 1;
+             F(n) = 1;
+            
+        elseif i == nx
+             G(n,:) = 0;
+             G(n,n) = 1;
+        
+        elseif j == 1
+            nxm = j + (i-2) * ny;
+            nxp = j + (i) * ny;
+            nyp = (j+1) + (i-1) * ny;
+            
+            rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+            rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+            ryp = (cMap(i,j) + cMap(i,j+1))/2.0;
+            
+            G(n,n) = -(rxm + rxp + ryp); 
+            G(n,nxm) = rxm;
+            G(n,nxp) = rxp;
+            G(n, nyp) = ryp;
+              
+        elseif j == ny
+            nxm = j + (i-2) * ny;
+            nxp = j + (i) * ny;
+            nym = (j-1) + (i-1) * ny;
+            
+            rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+            rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+            rym = (cMap(i,j) + cMap(i,j-1))/2.0;
+            
+            G(n,n) = -(rxm + rxp + rym);
+            G(n,nxm) = rxm;
+            G(n,nxp) = rxp;
+            G(n, nym) = rym;
+      
+        else
+            nxm = j + (i-2) * ny;
+            nxp = j + (i) * ny;
+            nym = (j-1) + (i-1) * ny;
+            nyp = (j+1) + (i-1) * ny;
+            
+            rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+            rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+            rym = (cMap(i,j) + cMap(i,j-1))/2.0;
+            ryp = (cMap(i,j) + cMap(i,j+1))/2.0;
+            
+            G(n,n) = -(rxm + rxp + rym + ryp);
+            G(n,nxm) = rxm;
+            G(n,nxp) = rxp;
+            G(n, nym) = rym;
+            G(n, nyp) = ryp;
+        end
+    end
+end
+V = G\F';
+
+for i = 1:nx
+    for j = 1:ny
+        n = j + (i-1) * ny;
+        VG(i,j) = V(n);
+    end   
+end
+
+% V using the Analytical Series Method
+
+N =101;
+
+a = ny;
+b = nx/2;
+VpSig = zeros(nx,ny);
+
+for i = 1:nx
+    for j = 1:ny
+        if i == 1
+            Ex(i, j) = (VG(i + 1, j) - VG(i, j));
+        elseif i == nx
+            Ex(i, j) = (VG(i, j) - VG(i - 1, j));
+        else
+            Ex(i, j) = (VG(i + 1, j) - VG(i - 1, j)) * 0.5;
+        end
+        if j == 1
+            Ey(i, j) = (VG(i, j + 1) - VG(i, j));
+        elseif j == ny
+            Ey(i, j) = (VG(i, j) - VG(i, j - 1));
+        else
+            Ey(i, j) = (VG(i, j + 1) - VG(i, j - 1)) * 0.5;
+        end
+    end
+end
+
+Ex = -Ex;
+Ey = -Ey;
+
+Jx = cMap .* Ex;
+Jy = cMap .* Ey;
+
+figure
+
+H = surf(cMap');
+title('Conductivity Map')
+set(H, 'linestyle', 'none');
+view(0, 90)
+
+figure 
+H = surf(VG');
+title('Vmap with bottle neck')
+set(H, 'linestyle', 'none');
+
+view(0, 90)
+
+figure 
+quiver(Ex', Ey');
+title('Electric field Map')
+axis([0 nx 0 ny]);
+
+figure
+quiver(Jx', Jy');
+title('Current Density Map')
+axis([0 nx 0 ny]);
+
+C0 = sum(Jx(1, :));
+Cnx = sum(Jx(nx, :));
+Curr = (C0 + Cnx) * 0.5;
+
+%% Graph of current vs mesh size
+clearvars
+clearvars -GLOBAL
+close all
+set(0,'DefaultFigureWindowStyle', 'docked')
+
+global C
+global CuCond NoCond
+global nx ny
+
+C.q_0 = 1.60217653e-19;             % electron charge
+C.hb = 1.054571596e-34;             % Dirac constant
+C.h = C.hb * 2 * pi;                    % Planck constant
+C.m_0 = 9.10938215e-31;             % electron mass
+C.kb = 1.3806504e-23;               % Boltzmann constant
+C.eps_0 = 8.854187817e-12;          % vacuum permittivity
+C.mu_0 = 1.2566370614e-6;           % vacuum permeability
+C.c = 299792458;                    % speed of light
+C.g = 9.80665;                      % metres (32.1740 ft) per s²
+
+nx = 20;
+ny = 20;
+startSim = 20;
+limitSim = 100;
+
+Curr = zeros(1,limitSim);
+Meshsizes = zeros(1,limitSim);
+neckBT = zeros(1,limitSim);
+
+for u = 1:limitSim
+    
+    Meshsizes(u) = nx;
+    
+    Lb = floor(nx/3);
+    Wb = floor(ny/3);
+    
+    
+    CuCond = 1;
+    NoCond = 10e-2;
+    
+    %Conductivity map
+    
+    cMap = zeros(nx,ny);
+    
+    for i = 1:nx
+        for j = 1: ny
+            cMap(i,j) = CuCond;
+        end
+    end
+    
+    for i = 1:nx
+        for j = 1:ny
+            if (i>=1 && i<=Wb && j>Lb && j<=(2*Lb))
+                cMap(i,j) = NoCond;
+            end
+            
+            if (i<=ny && i>=(ny-Wb) && j>Lb && j<=(2*Lb))
+                cMap(i,j) = NoCond;
+            end
+        end
+    end
+    
+    G = sparse(nx*ny, nx*ny);
+    F = zeros(1, nx*ny);
+    
+    for i = 1:nx
+        for j = 1:ny
+            n = j + (i - 1) * ny;
+            
+            if i == 1
+                G(n,:) = 0;
+                G(n,n) = 1;
+                F(n) = 1;
+                
+            elseif i == nx
+                G(n,:) = 0;
+                G(n,n) = 1;
+                
+            elseif j == 1
+                nxm = j + (i-2) * ny;
+                nxp = j + (i) * ny;
+                nyp = (j+1) + (i-1) * ny;
+                
+                rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+                rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+                ryp = (cMap(i,j) + cMap(i,j+1))/2.0;
+                
+                G(n,n) = -(rxm + rxp + ryp);
+                G(n,nxm) = rxm;
+                G(n,nxp) = rxp;
+                G(n, nyp) = ryp;
+                
+            elseif j == ny
+                nxm = j + (i-2) * ny;
+                nxp = j + (i) * ny;
+                nym = (j-1) + (i-1) * ny;
+                
+                rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+                rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+                rym = (cMap(i,j) + cMap(i,j-1))/2.0;
+                
+                G(n,n) = -(rxm + rxp + rym);
+                G(n,nxm) = rxm;
+                G(n,nxp) = rxp;
+                G(n, nym) = rym;
+                
+            else
+                nxm = j + (i-2) * ny;
+                nxp = j + (i) * ny;
+                nym = (j-1) + (i-1) * ny;
+                nyp = (j+1) + (i-1) * ny;
+                
+                rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+                rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+                rym = (cMap(i,j) + cMap(i,j-1))/2.0;
+                ryp = (cMap(i,j) + cMap(i,j+1))/2.0;
+                
+                G(n,n) = -(rxm + rxp + rym + ryp);
+                G(n,nxm) = rxm;
+                G(n,nxp) = rxp;
+                G(n, nym) = rym;
+                G(n, nyp) = ryp;
+            end
+        end
+    end
+    V = G\F';
+    
+    for i = 1:nx
+        for j = 1:ny
+            n = j + (i-1) * ny;
+            VG(i,j) = V(n);
+        end
+    end
+    
+    for i = 1:nx
+        for j = 1:ny
+            if i == 1
+                Ex(i, j) = (VG(i + 1, j) - VG(i, j));
+            elseif i == nx
+                Ex(i, j) = (VG(i, j) - VG(i - 1, j));
+            else
+                Ex(i, j) = (VG(i + 1, j) - VG(i - 1, j)) * 0.5;
+            end
+            if j == 1
+                Ey(i, j) = (VG(i, j + 1) - VG(i, j));
+            elseif j == ny
+                Ey(i, j) = (VG(i, j) - VG(i, j - 1));
+            else
+                Ey(i, j) = (VG(i, j + 1) - VG(i, j - 1)) * 0.5;
+            end
+        end
+    end
+    
+    Ex = -Ex;
+    Ey = -Ey;
+    
+    Jx = cMap .* Ex;
+    Jy = cMap .* Ey;
+    
+    C0 = sum(Jx(1, :));
+    Cnx = sum(Jx(nx, :));
+    
+    %Current
+    Curr(u) = (C0 + Cnx) * 0.5;
+    
+    %Sizes
+    nx = nx+1;
+    ny = ny+1;
+end
+
+%Current vs Mesh Size
+figure
+plot(Meshsizes, Curr);
+title('Current vs Mesh Size')
+xlabel('Mesh size')
+ylabel('Current (A)')
+
+%% Current vs bottle Neck
+clearvars
+clearvars -GLOBAL
+close all
+set(0,'DefaultFigureWindowStyle', 'docked')
+
+global C
+global CuCond NoCond
+global nx ny
+
+C.q_0 = 1.60217653e-19;             % electron charge
+C.hb = 1.054571596e-34;             % Dirac constant
+C.h = C.hb * 2 * pi;                    % Planck constant
+C.m_0 = 9.10938215e-31;             % electron mass
+C.kb = 1.3806504e-23;               % Boltzmann constant
+C.eps_0 = 8.854187817e-12;          % vacuum permittivity
+C.mu_0 = 1.2566370614e-6;           % vacuum permeability
+C.c = 299792458;                    % speed of light
+C.g = 9.80665;                      % metres (32.1740 ft) per s²
+
+nx = 100;
+ny = 100;
+startSim = 20;
+limitSim = 100;
+
+Curr = zeros(1,limitSim);
+Necksizes = zeros(1,limitSim);
+
+Lb = floor(nx/3);
+Wb = floor(ny/3);
+
+for u = 1:limitSim
+    
+    Necksizes(u) = Wb;
+    
+    CuCond = 1;
+    NoCond = 10e-2;
+    
+    %Conductivity map
+    
+    cMap = zeros(nx,ny);
+    
+    for i = 1:nx
+        for j = 1: ny
+            cMap(i,j) = CuCond;
+        end
+    end
+    
+    for i = 1:nx
+        for j = 1:ny
+            if (i>=1 && i<=Wb && j>Lb && j<=(2*Lb))
+                cMap(i,j) = NoCond;
+            end
+            
+            if (i<=ny && i>=(ny-Wb) && j>Lb && j<=(2*Lb))
+                cMap(i,j) = NoCond;
+            end
+        end
+    end
+    
+    G = sparse(nx*ny, nx*ny);
+    F = zeros(1, nx*ny);
+    
+    for i = 1:nx
+        for j = 1:ny
+            n = j + (i - 1) * ny;
+            
+            if i == 1
+                G(n,:) = 0;
+                G(n,n) = 1;
+                F(n) = 1;
+                
+            elseif i == nx
+                G(n,:) = 0;
+                G(n,n) = 1;
+                
+            elseif j == 1
+                nxm = j + (i-2) * ny;
+                nxp = j + (i) * ny;
+                nyp = (j+1) + (i-1) * ny;
+                
+                rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+                rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+                ryp = (cMap(i,j) + cMap(i,j+1))/2.0;
+                
+                G(n,n) = -(rxm + rxp + ryp);
+                G(n,nxm) = rxm;
+                G(n,nxp) = rxp;
+                G(n, nyp) = ryp;
+                
+            elseif j == ny
+                nxm = j + (i-2) * ny;
+                nxp = j + (i) * ny;
+                nym = (j-1) + (i-1) * ny;
+                
+                rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+                rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+                rym = (cMap(i,j) + cMap(i,j-1))/2.0;
+                
+                G(n,n) = -(rxm + rxp + rym);
+                G(n,nxm) = rxm;
+                G(n,nxp) = rxp;
+                G(n, nym) = rym;
+                
+            else
+                nxm = j + (i-2) * ny;
+                nxp = j + (i) * ny;
+                nym = (j-1) + (i-1) * ny;
+                nyp = (j+1) + (i-1) * ny;
+                
+                rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+                rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+                rym = (cMap(i,j) + cMap(i,j-1))/2.0;
+                ryp = (cMap(i,j) + cMap(i,j+1))/2.0;
+                
+                G(n,n) = -(rxm + rxp + rym + ryp);
+                G(n,nxm) = rxm;
+                G(n,nxp) = rxp;
+                G(n, nym) = rym;
+                G(n, nyp) = ryp;
+            end
+        end
+    end
+    V = G\F';
+    
+    for i = 1:nx
+        for j = 1:ny
+            n = j + (i-1) * ny;
+            VG(i,j) = V(n);
+        end
+    end
+    
+    for i = 1:nx
+        for j = 1:ny
+            if i == 1
+                Ex(i, j) = (VG(i + 1, j) - VG(i, j));
+            elseif i == nx
+                Ex(i, j) = (VG(i, j) - VG(i - 1, j));
+            else
+                Ex(i, j) = (VG(i + 1, j) - VG(i - 1, j)) * 0.5;
+            end
+            if j == 1
+                Ey(i, j) = (VG(i, j + 1) - VG(i, j));
+            elseif j == ny
+                Ey(i, j) = (VG(i, j) - VG(i, j - 1));
+            else
+                Ey(i, j) = (VG(i, j + 1) - VG(i, j - 1)) * 0.5;
+            end
+        end
+    end
+    
+    Ex = -Ex;
+    Ey = -Ey;
+    
+    Jx = cMap .* Ex;
+    Jy = cMap .* Ey;
+    
+    C0 = sum(Jx(1, :));
+    Cnx = sum(Jx(nx, :));
+    
+    %Current
+    Curr(u) = (C0 + Cnx) * 0.5;
+    
+    %Bottle Neck
+    Necksizes(u) = ny - (2*Wb);
+    
+    %Sizes
+    Wb = Wb+1;
+end
+
+%Current vs Neck Size
+figure
+plot(Necksizes, Curr);
+title('Current vs bottle-necks')
+xlabel('Bottle neck width')
+ylabel('Current (A)')
+
+%%
+% Negative botle neck sizes represent neck overlaps.
+
+%% Current vs Conductivity
+clearvars
+clearvars -GLOBAL
+close all
+set(0,'DefaultFigureWindowStyle', 'docked')
+
+global C
+global CuCond NoCond
+global nx ny
+
+C.q_0 = 1.60217653e-19;             % electron charge
+C.hb = 1.054571596e-34;             % Dirac constant
+C.h = C.hb * 2 * pi;                    % Planck constant
+C.m_0 = 9.10938215e-31;             % electron mass
+C.kb = 1.3806504e-23;               % Boltzmann constant
+C.eps_0 = 8.854187817e-12;          % vacuum permittivity
+C.mu_0 = 1.2566370614e-6;           % vacuum permeability
+C.c = 299792458;                    % speed of light
+C.g = 9.80665;                      % metres (32.1740 ft) per s²
+
+nx = 100;
+ny = 100;
+startSim = 20;
+limitSim = 100;
+
+Curr = zeros(1,limitSim);
+CuCondVal = zeros(1,limitSim);
+
+Lb = floor(nx/3);
+Wb = floor(ny/3);
+
+for i = 1:limitSim
+    CuCondVal(i) = i;
+end
+
+for u = 1:limitSim
+    
+    CuCond = CuCondVal(u);
+    NoCond = 10e-2;
+    
+    %Conductivity map
+    
+    cMap = zeros(nx,ny);
+    
+    for i = 1:nx
+        for j = 1: ny
+            cMap(i,j) = CuCond;
+        end
+    end
+    
+    for i = 1:nx
+        for j = 1:ny
+            if (i>=1 && i<=Wb && j>Lb && j<=(2*Lb))
+                cMap(i,j) = NoCond;
+            end
+            
+            if (i<=ny && i>=(ny-Wb) && j>Lb && j<=(2*Lb))
+                cMap(i,j) = NoCond;
+            end
+        end
+    end
+    
+    G = sparse(nx*ny, nx*ny);
+    F = zeros(1, nx*ny);
+    
+    for i = 1:nx
+        for j = 1:ny
+            n = j + (i - 1) * ny;
+            
+            if i == 1
+                G(n,:) = 0;
+                G(n,n) = 1;
+                F(n) = 1;
+                
+            elseif i == nx
+                G(n,:) = 0;
+                G(n,n) = 1;
+                
+            elseif j == 1
+                nxm = j + (i-2) * ny;
+                nxp = j + (i) * ny;
+                nyp = (j+1) + (i-1) * ny;
+                
+                rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+                rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+                ryp = (cMap(i,j) + cMap(i,j+1))/2.0;
+                
+                G(n,n) = -(rxm + rxp + ryp);
+                G(n,nxm) = rxm;
+                G(n,nxp) = rxp;
+                G(n, nyp) = ryp;
+                
+            elseif j == ny
+                nxm = j + (i-2) * ny;
+                nxp = j + (i) * ny;
+                nym = (j-1) + (i-1) * ny;
+                
+                rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+                rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+                rym = (cMap(i,j) + cMap(i,j-1))/2.0;
+                
+                G(n,n) = -(rxm + rxp + rym);
+                G(n,nxm) = rxm;
+                G(n,nxp) = rxp;
+                G(n, nym) = rym;
+                
+            else
+                nxm = j + (i-2) * ny;
+                nxp = j + (i) * ny;
+                nym = (j-1) + (i-1) * ny;
+                nyp = (j+1) + (i-1) * ny;
+                
+                rxm = (cMap(i,j) + cMap(i-1,j))/2.0;
+                rxp = (cMap(i,j) + cMap(i+1,j))/2.0;
+                rym = (cMap(i,j) + cMap(i,j-1))/2.0;
+                ryp = (cMap(i,j) + cMap(i,j+1))/2.0;
+                
+                G(n,n) = -(rxm + rxp + rym + ryp);
+                G(n,nxm) = rxm;
+                G(n,nxp) = rxp;
+                G(n, nym) = rym;
+                G(n, nyp) = ryp;
+            end
+        end
+    end
+    V = G\F';
+    
+    for i = 1:nx
+        for j = 1:ny
+            n = j + (i-1) * ny;
+            VG(i,j) = V(n);
+        end
+    end
+    
+    for i = 1:nx
+        for j = 1:ny
+            if i == 1
+                Ex(i, j) = (VG(i + 1, j) - VG(i, j));
+            elseif i == nx
+                Ex(i, j) = (VG(i, j) - VG(i - 1, j));
+            else
+                Ex(i, j) = (VG(i + 1, j) - VG(i - 1, j)) * 0.5;
+            end
+            if j == 1
+                Ey(i, j) = (VG(i, j + 1) - VG(i, j));
+            elseif j == ny
+                Ey(i, j) = (VG(i, j) - VG(i, j - 1));
+            else
+                Ey(i, j) = (VG(i, j + 1) - VG(i, j - 1)) * 0.5;
+            end
+        end
+    end
+    
+    Ex = -Ex;
+    Ey = -Ey;
+    
+    Jx = cMap .* Ex;
+    Jy = cMap .* Ey;
+    
+    C0 = sum(Jx(1, :));
+    Cnx = sum(Jx(nx, :));
+    
+    %Current
+    Curr(u) = (C0 + Cnx) * 0.5;
+
+end
+
+%Current vs Neck Size
+figure
+plot(CuCondVal, Curr);
+title('Current vs Conductivity')
+xlabel('Conductivity')
+ylabel('Current (A)')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+##### SOURCE END #####
+--></body></html>
